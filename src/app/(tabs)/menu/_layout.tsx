@@ -12,7 +12,7 @@ export default function MenuStack() {
         options={{
           title: 'Пиццы',
           headerLeft: () => (
-            <Link href="/cart" asChild>
+            <Link style={{ marginRight: 10 }} href="/cart" asChild>
               <Pressable>
                 <FontAwesome name="shopping-cart" size={20} color={Colors.light.tint} />
               </Pressable>

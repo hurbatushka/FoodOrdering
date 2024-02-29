@@ -9,13 +9,14 @@ import SizeList from '@/components/SizeList';
 import Button from '@/components/Button';
 
 const sizes = ['S', 'M', 'L', 'XL'];
+const upPrice = [1, 1.2, 1.5, 1.8];
 
 export default function ProductDetailsScreen() {
   const { id } = useLocalSearchParams();
   const pizza = products.find((p) => p.id.toString() === id);
 
   const [selectedSize, setSelectedSize] = useState(sizes[0]);
-
+  const currentPrice: number = pizza?.price * upPrice[sizes.indexOf(selectedSize)];
   const addToCard = () => {
     console.warn('Добавлено в корзину: ' + pizza?.name + ' ' + selectedSize);
   };
@@ -38,7 +39,7 @@ export default function ProductDetailsScreen() {
         resizeMode="contain"
       />
       <SizeList sizeArray={sizes} selectedSize={selectedSize} setSelectedSize={setSelectedSize} />
-      <Text style={styles.price}>Цена: {pizza?.price} BYN</Text>
+      <Text style={styles.price}>Цена: {currentPrice.toFixed(2)} BYN</Text>
       <Button text="Добавить в корзину" onPress={addToCard} />
     </View>
   );
