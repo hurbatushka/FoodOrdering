@@ -6,6 +6,9 @@ import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
 
 import { useColorScheme } from '@/components/useColorScheme';
+import { Pressable } from 'react-native';
+import Colors from '@/constants/Colors';
+import CartProvider from '@/providers/CartProvider';
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -22,7 +25,7 @@ SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
   const [loaded, error] = useFonts({
-    SpaceMono: require('../../assets/fonts/SpaceMono-Regular.ttf'),
+    SpaceMono: require('@assets/fonts/SpaceMono-Regular.ttf'),
     ...FontAwesome.font,
   });
 
@@ -48,11 +51,27 @@ function RootLayoutNav() {
   const colorScheme = useColorScheme();
 
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
-      </Stack>
+    // <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+    <ThemeProvider value={DefaultTheme}>
+      <CartProvider>
+        <Stack>
+          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+          <Stack.Screen
+            name="cart"
+            options={{
+              presentation: 'modal',
+              title: 'Корзина',
+              headerBackTitle: 'Пиццы',
+              headerRight: () => (
+                <Pressable>
+                  <FontAwesome name="trash-o" size={24} color={Colors.light.tabIconDefault} />
+                </Pressable>
+              ),
+            }}
+            // если нечего очищать, то и серая картинка tabIconDefault
+          />
+        </Stack>
+      </CartProvider>
     </ThemeProvider>
   );
 }
