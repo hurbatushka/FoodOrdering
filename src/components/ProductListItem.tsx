@@ -32,9 +32,9 @@ export const styles = StyleSheet.create({
   title: {
     fontSize: 18,
     fontWeight: 'bold',
-    marginBottom: 2,
     marginTop: 10,
     marginLeft: 5,
+    marginBottom: 'auto',
   },
   price: {
     marginBottom: 10,
@@ -43,6 +43,7 @@ export const styles = StyleSheet.create({
     color: Colors.light.tint,
     textDecorationStyle: 'solid',
     marginLeft: 5,
+    marginTop: 'auto',
   },
   image: {
     width: '100%',

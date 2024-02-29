@@ -7,18 +7,25 @@ import { DefaultPizzaImage } from '@/constants/DefaultPizzaImage';
 import { useState } from 'react';
 import SizeList from '@/components/SizeList';
 import Button from '@/components/Button';
+import { useCart } from '@/providers/CartProvider';
+import { PizzaSize, Product } from '@/types/types';
 
-const sizes = ['S', 'M', 'L', 'XL'];
+const sizes: PizzaSize[] = ['S', 'M', 'L', 'XL'];
 const upPrice = [1, 1.2, 1.5, 1.8];
 
 export default function ProductDetailsScreen() {
   const { id } = useLocalSearchParams();
-  const pizza = products.find((p) => p.id.toString() === id);
+  const pizza: any = products.find((p) => p.id.toString() === id);
+  const { addItem } = useCart();
 
-  const [selectedSize, setSelectedSize] = useState(sizes[0]);
-  const currentPrice: number = pizza?.price * upPrice[sizes.indexOf(selectedSize)];
+  const [selectedSize, setSelectedSize] = useState<PizzaSize>(sizes[0]);
+
+  const currentPrice: number = pizza?.price && pizza.price * upPrice[sizes.indexOf(selectedSize)];
   const addToCard = () => {
-    console.warn('Добавлено в корзину: ' + pizza?.name + ' ' + selectedSize);
+    if (!pizza) {
+      return;
+    }
+    addItem(pizza, selectedSize, currentPrice);
   };
 
   if (!pizza) {

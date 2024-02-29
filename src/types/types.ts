@@ -13,14 +13,10 @@ export type CartItem = {
   product_id: number;
   size: PizzaSize;
   quantity: number;
+  price: number;
 };
 
-export const OrderStatusList: OrderStatus[] = [
-  'New',
-  'Cooking',
-  'Delivering',
-  'Delivered',
-];
+export const OrderStatusList: OrderStatus[] = ['New', 'Cooking', 'Delivering', 'Delivered'];
 
 export type OrderStatus = 'New' | 'Cooking' | 'Delivering' | 'Delivered';
 
@@ -31,6 +27,7 @@ export type Order = {
   user_id: string;
   status: OrderStatus;
 
+  price: number;
   order_items?: OrderItem[];
 };
 

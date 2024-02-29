@@ -1,12 +1,13 @@
 import Colors from '@/constants/Colors';
+import { PizzaSize } from '@/types/types';
 import React from 'react';
 import { Pressable, StyleSheet } from 'react-native';
 import { View, Text } from 'react-native';
 
 type SizeListProps = {
-  sizeArray: string[];
-  selectedSize: string;
-  setSelectedSize: React.Dispatch<React.SetStateAction<string>>;
+  sizeArray: PizzaSize[];
+  selectedSize: PizzaSize;
+  setSelectedSize: React.Dispatch<React.SetStateAction<PizzaSize>>;
 };
 
 export default function SizeList({ sizeArray, selectedSize, setSelectedSize }: SizeListProps) {
