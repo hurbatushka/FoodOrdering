@@ -6,9 +6,9 @@ import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
 
 import { useColorScheme } from '@/components/useColorScheme';
-import { Pressable } from 'react-native';
+import { Pressable, Text, View } from 'react-native';
 import Colors from '@/constants/Colors';
-import CartProvider from '@/providers/CartProvider';
+import CartProvider, { useCart } from '@/providers/CartProvider';
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -50,6 +50,7 @@ export default function RootLayout() {
 function RootLayoutNav() {
   const colorScheme = useColorScheme();
 
+  const { items, removeAllitems, HasItems } = useCart();
   return (
     // <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
     <ThemeProvider value={DefaultTheme}>
@@ -62,11 +63,6 @@ function RootLayoutNav() {
               presentation: 'modal',
               title: 'Корзина',
               headerBackTitle: 'Пиццы',
-              headerRight: () => (
-                <Pressable>
-                  <FontAwesome name="trash-o" size={24} color={Colors.light.tabIconDefault} />
-                </Pressable>
-              ),
             }}
             // если нечего очищать, то и серая картинка tabIconDefault
           />
