@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, Image, FlatList, Pressable } from 'react-native';
+import { Text, View, Image, FlatList, Pressable, TouchableOpacity } from 'react-native';
 import { StyleSheet } from 'react-native';
 import { Stack, useLocalSearchParams, useRouter } from 'expo-router';
 import products from '@assets/data/products';
@@ -49,7 +49,9 @@ export default function ProductDetailsScreen() {
       />
       <SizeList sizeArray={sizes} selectedSize={selectedSize} setSelectedSize={setSelectedSize} />
       <Text style={styles.price}>Цена: {currentPrice.toFixed(2)} BYN</Text>
-      <Button text="Добавить в корзину" onPress={addToCard} />
+      <TouchableOpacity>
+        <Button text="Добавить в корзину" onPress={addToCard} />
+      </TouchableOpacity>
     </View>
   );
 }

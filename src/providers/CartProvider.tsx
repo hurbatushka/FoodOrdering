@@ -10,6 +10,7 @@ type CartType = {
   updateQuantity: (id: string, amount: -1 | 1) => void;
   removeAllitems: () => void;
   HasItems: () => boolean;
+  total: number;
 };
 
 export const CartContext = createContext<CartType>({
@@ -19,6 +20,7 @@ export const CartContext = createContext<CartType>({
   removeAllitems: () => {},
   updateQuantity: () => {},
   HasItems: (): boolean | any => {},
+  total: 0,
 });
 
 const CartProvider = ({ children }: CartProviderProps) => {
@@ -67,6 +69,8 @@ const CartProvider = ({ children }: CartProviderProps) => {
     );
   };
 
+  const total = items.reduce((acc, item) => acc + item.price * item.quantity, 0);
+
   return (
     <CartContext.Provider
       value={{
@@ -76,6 +80,7 @@ const CartProvider = ({ children }: CartProviderProps) => {
         removeAllitems,
         HasItems,
         updateQuantity,
+        total,
       }}>
       {children}
     </CartContext.Provider>
