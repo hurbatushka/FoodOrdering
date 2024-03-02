@@ -53,13 +53,12 @@ export default function CartScreen() {
         contentContainerStyle={{ gap: 10, padding: 10 }}
         ListFooterComponent={
           items.length > 0 ? (
-            <TouchableOpacity>
+            <>
               <Text style={{ marginLeft: 10, marginTop: 20, fontSize: 17, fontWeight: 'bold' }}>
                 Итого: {total.toFixed(2)} BYN
               </Text>
-              {/* <Button text="Очистить корзину" onPress={removeAllitems} /> */}
               <Button text="Оформить заказ" />
-            </TouchableOpacity>
+            </>
           ) : (
             <View style={styles.container}>
               <Text style={styles.title}>Корзина пуста</Text>
